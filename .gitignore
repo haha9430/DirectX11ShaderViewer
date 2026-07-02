@@ -1,0 +1,53 @@
+﻿# Visual Studio / MSBuild
+.vs/
+.vscode/
+/Debug/
+/Release/
+/x64/
+/x86/
+/build/
+/out/
+DirectX11ShaderViewer/Debug/
+DirectX11ShaderViewer/Release/
+DirectX11ShaderViewer/x64/
+DirectX11ShaderViewer/x86/
+
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+*.opensdf
+*.sdf
+*.ipch
+*.tlog
+*.lastbuildstate
+*.log
+
+# Compiled objects / binaries
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.exe
+*.dll
+*.lib
+*.exp
+*.res
+
+# Generated renderer caches
+assets/textures/*cache.dds
+assets/textures/environment_*_cache.dds
+
+# Large source/intermediate environment assets
+assets/textures/*.exr
+assets/textures/environment_8k.hdr
+assets/textures/environment_8k.png
+assets/textures/environment_4k.png
+assets/textures/environment_2k.png
+
+# Local app/runtime state
+imgui.ini
+
+# OS files
+Thumbs.db
+Desktop.ini
