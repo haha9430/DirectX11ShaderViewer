@@ -112,14 +112,6 @@ src/systems         카메라/조명/후처리 컨트롤러
 image               README 스크린샷
 ```
 
-## 배운 점
-
-- 작은 DirectX 11 렌더러를 과도한 엔진 구조 없이 구성하는 방법
-- PBR에서 direct lighting, diffuse IBL, specular IBL, BRDF LUT가 결합되는 방식
-- HDR environment map을 runtime cubemap 리소스로 변환하는 흐름
-- CPU 처리 대신 GPU precompute pass를 사용해 environment 리소스를 생성하는 방법
-- ImGui debug view를 활용해 셰이더 중간 결과를 검증하는 방법
-
 ## 향후 개선 사항
 
 - Shadow mapping
