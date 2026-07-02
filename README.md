@@ -1,9 +1,9 @@
 # DirectX 11 Shader Viewer
 
-A real-time PBR shader viewer built with DirectX 11 and HLSL.  
-The project focuses on HDR environment lighting, GPU precompute passes, material texture set switching, and ImGui-based rendering debug tools.
+DirectX 11과 HLSL로 구현한 실시간 PBR 셰이더 뷰어입니다.  
+HDR 환경맵 기반 IBL, GPU precompute pass, PBR 텍스처 재질 전환, ImGui 디버그 UI를 중심으로 구성했습니다.
 
-## Demo
+## 데모
 
 ### Silver
 
@@ -17,23 +17,23 @@ The project focuses on HDR environment lighting, GPU precompute passes, material
 
 ![Bronze material preview](image/image03.png)
 
-## Features
+## 주요 기능
 
-- DirectX 11 device, swap chain, render target, depth stencil setup
-- WASD / mouse camera control
-- PBR sphere rendering with albedo, normal, metallic, roughness, AO textures
-- Silver, Light Gold, Bronze material texture set switching
-- HDR environment background and image based lighting
-- GPU equirectangular-to-cubemap conversion
-- GPU GGX prefiltered environment cubemap
-- GPU irradiance cubemap generation
-- GPU BRDF LUT generation
-- DDS cache loading/saving with DirectXTex
-- ImGui PBR debug view
-- BRDF LUT, irradiance, prefiltered environment resource preview
-- Window resize handling
+- DirectX 11 device, swap chain, render target, depth stencil 초기화
+- WASD / 마우스 기반 자유 카메라
+- albedo, normal, metallic, roughness, AO 텍스처를 사용하는 PBR 구 렌더링
+- Silver, Light Gold, Bronze 재질 텍스처셋 전환
+- HDR environment background와 image based lighting
+- GPU equirectangular-to-cubemap 변환
+- GPU GGX prefiltered environment cubemap 생성
+- GPU irradiance cubemap 생성
+- GPU BRDF LUT 생성
+- DirectXTex 기반 DDS cache 로드/저장
+- ImGui 기반 PBR debug view
+- BRDF LUT, irradiance cubemap, prefiltered environment resource preview
+- 창 크기 변경 대응
 
-## Tech Stack
+## 기술 스택
 
 - C++17
 - DirectX 11
@@ -43,86 +43,86 @@ The project focuses on HDR environment lighting, GPU precompute passes, material
 - DirectXTex
 - Windows Imaging Component
 
-## Build
+## 빌드 방법
 
-### Requirements
+### 요구 사항
 
 - Windows 10/11
 - Visual Studio 2022
 - MSVC v143
 - Windows SDK
-- x64 platform
+- x64 플랫폼
 
-### Steps
+### 빌드 순서
 
-1. Open `DirectX11ShaderViewer.sln`.
-2. Select `x64`.
-3. Select `Debug` or `Release`.
-4. Build the solution.
-5. Run `DirectX11ShaderViewer.exe` from the repository root or Visual Studio.
+1. `DirectX11ShaderViewer.sln`을 Visual Studio에서 엽니다.
+2. 플랫폼을 `x64`로 설정합니다.
+3. 구성을 `Debug` 또는 `Release`로 설정합니다.
+4. 솔루션을 빌드합니다.
+5. Visual Studio에서 실행하거나 저장소 루트 기준으로 실행 파일을 실행합니다.
 
-The app expects runtime assets under `assets/shaders` and `assets/textures`.
+런타임에는 `assets/shaders`, `assets/textures` 폴더의 리소스가 필요합니다.
 
-## Controls
+## 조작법
 
-- `WASD`: move camera
-- `Space / Ctrl`: move camera up/down
-- `Right Mouse Drag`: rotate camera
-- `F1`: toggle normal mapping
-- `F2`: toggle object rotation
-- `Z / X`: decrease/increase metallic factor
-- `C / V`: decrease/increase roughness factor
-- `B / N`: decrease/increase normal strength
-- `G / H`: decrease/increase AO strength
-- `- / +`: decrease/increase exposure
+- `WASD`: 카메라 이동
+- `Space / Ctrl`: 카메라 위/아래 이동
+- `마우스 우클릭 드래그`: 카메라 회전
+- `F1`: normal mapping 토글
+- `F2`: 오브젝트 회전 토글
+- `Z / X`: metallic factor 감소/증가
+- `C / V`: roughness factor 감소/증가
+- `B / N`: normal strength 감소/증가
+- `G / H`: AO strength 감소/증가
+- `- / +`: exposure 감소/증가
 
-## Debug UI
+## 디버그 UI
 
-The ImGui panel exposes:
+ImGui 패널에서 다음 항목을 실시간으로 조절하거나 확인할 수 있습니다.
 
-- PBR debug views: final, albedo, normal, metallic, roughness, AO, direct lighting, diffuse IBL, specular IBL, irradiance, prefiltered specular, BRDF LUT
-- Material texture set selection: Silver, Light Gold, Bronze
-- Direct light, diffuse IBL, specular IBL, background intensity, exposure controls
-- Resource preview for BRDF LUT, irradiance cubemap, and prefiltered environment cubemap
+- PBR debug view: final, albedo, normal, metallic, roughness, AO, direct lighting, diffuse IBL, specular IBL, irradiance, prefiltered specular, BRDF LUT
+- 재질 텍스처셋 선택: Silver, Light Gold, Bronze
+- direct light, diffuse IBL, specular IBL, background intensity, exposure 조절
+- BRDF LUT, irradiance cubemap, prefiltered environment cubemap preview
 
-## Asset Notes
+## 에셋 관련 메모
 
-Large generated environment files are intentionally excluded from Git:
+용량이 큰 environment 원본 및 생성 캐시는 Git에 포함하지 않습니다.
 
 - `assets/textures/*cache.dds`
 - `assets/textures/*.exr`
 - `assets/textures/environment_8k.hdr`
-- generated environment preview PNGs
+- 생성된 environment preview PNG 파일
 
-The environment cubemap, prefiltered cubemap, and irradiance cubemap are generated or loaded from DDS cache at runtime.
+environment cubemap, prefiltered cubemap, irradiance cubemap은 런타임에서 생성하거나 DDS cache가 존재할 경우 cache를 로드합니다.
 
-## Project Structure
+## 프로젝트 구조
 
 ```text
-assets/shaders      HLSL shader files
-assets/textures     Material textures and local environment assets
-docs                System notes and portfolio writeups
-external            Third-party libraries
-src/app             Win32 and app loop
-src/core            Input, timer, logging, utilities
-src/debug           ImGui and debug settings
-src/renderer        DirectX resources, renderer, materials, textures
-src/scene           Camera, light, scene objects
-src/systems         Camera/light/post-process controller shells
-image               README screenshots
+assets/shaders      HLSL 셰이더 파일
+assets/textures     재질 텍스처 및 로컬 environment 리소스
+docs                시스템 문서 및 포트폴리오 정리
+external            외부 라이브러리
+src/app             Win32 창 및 애플리케이션 루프
+src/core            입력, 타이머, 로깅, 유틸리티
+src/debug           ImGui 및 debug settings
+src/renderer        DirectX 리소스, 렌더러, 재질, 텍스처
+src/scene           카메라, 조명, 씬 오브젝트
+src/systems         카메라/조명/후처리 컨트롤러
+image               README 스크린샷
 ```
 
-## What I Learned
+## 배운 점
 
-- How to organize a small DirectX 11 renderer without turning it into a full engine
-- How PBR combines direct lighting, diffuse IBL, specular IBL, and BRDF LUT terms
-- How HDR environment maps are converted into runtime cubemap resources
-- How GPU precompute passes can replace slow CPU-side environment processing
-- How ImGui debug views make shader validation much easier
+- 작은 DirectX 11 렌더러를 과도한 엔진 구조 없이 구성하는 방법
+- PBR에서 direct lighting, diffuse IBL, specular IBL, BRDF LUT가 결합되는 방식
+- HDR environment map을 runtime cubemap 리소스로 변환하는 흐름
+- CPU 처리 대신 GPU precompute pass를 사용해 environment 리소스를 생성하는 방법
+- ImGui debug view를 활용해 셰이더 중간 결과를 검증하는 방법
 
-## Future Improvements
+## 향후 개선 사항
 
 - Shadow mapping
-- Bloom/post-processing polish
-- Environment selection and cache rebuild UI
-- Optional model loading after core rendering is stable
+- Bloom 및 post-processing polish
+- Environment 선택 및 cache rebuild UI
+- 핵심 렌더링 안정화 이후 optional model loading
